@@ -1,0 +1,57 @@
+.content {
+     height: 200px;
+     padding: 20px;
+     font-family: 'Roboto', sans-serif;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-bottom: none;
+}
+
+.content h1 {
+     font-size: 48px;
+}
+
+.content .title {
+     display: flex;
+     align-items: center;
+}
+
+.content .user img {
+     height: 50px;
+     width: 50px;
+     border-radius: 50%;
+}
+
+.content .user {
+     font-size: 24px;
+     align-items: center;
+     display: flex;
+}
+
+.content .user #publishButton {
+     border: 1px grey solid;
+     font-family: 'Roboto', sans-serif;
+     border-radius: 8px;
+     padding: 10px;
+     background-color: white;
+     margin-right: 20px;
+     transition: .2s ease-in-out;
+     cursor: pointer;
+}
+
+.content .user #publishButton:hover {
+     border: 1px #20cf32 solid;
+     color: #20cf32;
+}
+
+.content .user .searchButton {
+     color: rgb(94, 94, 94); 
+     margin-right: 20px;
+     transition: .2s ease-in-out;
+     cursor: pointer;
+}
+
+.content .user .searchButton:hover {
+     color: #20cf32;
+}

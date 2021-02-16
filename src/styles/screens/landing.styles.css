@@ -1,0 +1,297 @@
+#renderedPost #mainPostImage img {
+     width: 500px;
+     height: 350px;
+     padding: 2px;
+     border-radius: 16px;
+     border-bottom: 3px solid #20cf32;
+}
+
+#renderedPost {
+     max-width: 500px;
+     cursor: pointer;
+}
+
+#renderedPost hr {
+     width: 500px;
+     border: 2px solid #949494;
+     margin-bottom: 20px;
+}
+
+#postLegendData img {
+     height: 35px;
+     width: 35px;
+     border-radius: 50%;
+}
+
+#postLegendData {
+     display: flex;
+     align-items: center;
+}
+
+#postLegendData h3 {
+     margin-left: 10px;
+     font-family: 'Open Sans', sans-serif;
+     font-weight: 400;
+     font-style: italic;
+     font-size: 14px;
+}
+
+#postLegendTitle h1{
+     font-family: 'Roboto', sans-serif;
+     font-weight: 900;
+}
+
+#postLegendTitle h3{
+     font-family: 'Roboto', sans-serif;
+     font-weight: 400;
+}
+
+.recomended {
+     padding: 20px;
+}
+
+.vl {
+     border-left: .1px solid #949494;
+     height: 500px;
+}
+
+.postsHolder {
+     display: flex;
+     justify-content: space-between;
+}
+
+.verticalRecomendations ul li {
+     list-style: none;
+}
+
+#vListAuthorDetails img{
+     height: 30px;
+     width: 30px;
+     border-radius: 8px;
+}
+
+#vListAuthorDetails {
+     display: flex;
+     align-items: center;
+     font-family: 'Open Sans', sans-serif;
+     font-weight: 400;
+     font-style: italic;
+}
+
+#vListAuthorDetails p {
+     margin-left: 10px;
+}
+
+#vListPost {
+     max-width: 400px;
+     display: flex;
+     align-items: center;
+     margin-bottom: 20px;
+     cursor: pointer;
+}
+
+#vListPostThumbSection img {
+     margin-left: 20px;
+     height: 200px;
+     width: 200px;
+     border-radius: 16px;
+}
+
+#vListPostInfoHandler p {
+     font-family: 'Open Sans', sans-serif;
+     font-weight: 400;
+     font-style: italic;
+}
+
+#vListPost h3 {
+     font-family: 'Open Sans', sans-serif;
+}
+
+.recomendedProfiles li {
+     list-style: none;
+     line-break: none;
+     margin: none;
+     margin-right: 30px;
+     margin-bottom: 20px;
+     cursor: pointer;
+}
+
+.recomendedProfiles li img {
+     height: 100px;
+     width: 100px;
+     border-radius: 50%;
+}
+
+.recomendedProfiles h2 {
+     font-family: 'Roboto', sans-serif;
+     margin-right: 30px;
+}
+
+#trendingGeekTopics {
+     padding: 50px;
+}
+
+#trendingGeekTopics h2 {
+     font-family: 'Roboto', sans-serif;
+}
+
+#trendingGeekTopics .titleHolder {
+     display: flex;
+     align-items: center;
+     font-size: 24px;
+     font-weight: 900;
+}
+
+#trendingTopicLine {
+     display: flex;
+     align-items: center;
+     margin-bottom: 30px;
+}
+
+#tredingTopic #orderNumber h1 {
+     color: #a8a8a8;
+     font-family: 'Roboto', sans-serif;
+     font-size: 48px;
+     margin-right: 20px;
+}
+
+#tredingTopic #orderNumber {
+     margin-right: 10px;
+}
+
+#topicTitle h3 {
+     font-family: 'Roboto', sans-serif;
+}
+
+#tredingTopic {
+     display: flex;
+     align-items: center;
+     max-width: 500px;
+     margin-right: 100px;
+     cursor: pointer;
+}
+
+#topicTitle img {
+     height: 30px;
+     width: 30px;
+     border-radius: 8px;
+}
+
+#topicTitle p {
+     font-family: 'Open Sans', sans-serif;
+     font-weight: 400;
+     font-style: italic;
+}
+
+#trendingTopicUsername {
+     font-family: 'Open Sans', sans-serif;
+     font-weight: 400;
+     font-style: italic;
+     margin-left: 10px;
+}
+
+#trendingTopicAuthorInfoHolder {
+     display: flex;
+     align-items: center;
+     margin-bottom: -20px;
+}
+
+.trendingTags {
+     padding: 50px;
+}
+
+.subjectsHandler {
+     display: flex;
+     align-items: center;
+}
+
+.trendingTags .titleHolder {
+     display: flex;
+     align-items: center;
+     font-size: 24px;
+     font-weight: 900;
+     font-family: 'Roboto', sans-serif;
+}
+
+.subjectsHolder {
+     padding: 5px;
+     width: 200px;
+     border-radius: 32px;
+     margin-right: 20px;
+     transition: .4s ease-in-out;
+     cursor: pointer;
+}
+
+.subjectsHolder #subjectTitle {
+     display: flex;
+     align-items: center;
+     font-weight: 900;
+     font-family: 'Roboto', sans-serif;
+     justify-content: center;
+     color: black;
+     transition: .4s ease-in-out;
+}
+
+#subjectLikeCount {
+     font-family: 'Open Sans', sans-serif;
+     font-weight: 400;
+     font-style: italic;
+     color: black;
+     display: flex;
+     justify-content: center;
+     margin-top: -20px;
+     align-items: center;
+     margin-right: 20px;
+     transition: .4s ease-in-out;
+}
+
+#subjectStartsCount {
+     font-family: 'Open Sans', sans-serif;
+     font-weight: 400;
+     font-style: italic;
+     color: black;
+     display: flex;
+     justify-content: center;
+     margin-top: -20px;
+     align-items: center;
+     transition: .4s ease-in-out;
+}
+
+#followSubjectButtonHolder {
+     display: flex;
+     justify-content: center;
+}
+
+#followSubjectButtonHolder button {
+     padding: 10px;
+     border-radius: 8px;
+     background-color: #1bac2a;
+     width: 100px;
+     font-family: 'Roboto', sans-serif;
+     color: white;
+     border: none;
+     transition: .2s ease-in-out;
+     cursor: pointer;
+}
+
+#followSubjectButtonHolder button:hover {
+     background-color: #188623;
+}
+
+#subjectData {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+
+.meetNewPeople {
+     padding: 50px;
+}
+
+.meetNewPeople .titleHolder {
+     display: flex;
+     align-items: center;
+     font-size: 24px;
+     font-weight: 900;
+     font-family: 'Roboto', sans-serif;
+}
