@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FiSearch, FiLogIn, FiLock, FiUser } from "react-icons/fi";
+import { FiSearch, FiLogIn, FiLock, FiUser, FiEye } from "react-icons/fi";
 import { FaFire } from "react-icons/fa"
 import { Link, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -242,6 +242,11 @@ export default function HeaderBar() {
                          <div className="loginInputWrapper">
                               <FiLogIn style={{fontSize:"24px", marginRight:"10px"}}/>
                               <input placeholder="Nome de usuário" id="signupInputUsername"/>
+                         </div>
+
+                         <div className="loginInputWrapper">
+                              <FiEye style={{fontSize:"24px", marginRight:"10px"}}/>
+                              <input placeholder="Nome de exibição" id="loginScreenNInput"/>
                          </div>
 
                          <div className="loginInputWrapper">
