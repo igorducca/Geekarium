@@ -10,13 +10,14 @@ export default function Login() {
      var password = document.getElementById("loginPasswordInput").value;
      var rememberIf = document.getElementById("rememberMeCheckbox").value;
 
-     console.log(rememberIf)
-
      axios.post(`https://geekarium.herokuapp.com/users/login`, {
           username: username,
           password: password
      })
      .then(resp => {
+
+          console.log(`First data: ${resp.data}`)
+
           if(resp.data.sucesso == true) {
                axios.get(`https://geekarium.herokuapp.com/cookie/generate/${resp.data.userId}`)
                .then(respp => {

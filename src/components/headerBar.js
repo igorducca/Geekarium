@@ -60,8 +60,10 @@ export default function HeaderBar() {
           axios.get(`https://geekarium.herokuapp.com/uses/get/cookie/${cookies.gkid}`)
           .then(resp => {
                var data = resp.data;
+
                setProfileIsOpen(true);
                document.getElementById("userModalImage").src = data.data.userPicture;
+               document.getElementById("modalProfileUsername").innerText = `@${data.data.screen_name}`
           })
      }
 
@@ -93,13 +95,32 @@ export default function HeaderBar() {
 
      const [cookies, setCookie] = useCookies(["gkid"]);
 
+     console.log(`Gk ID: ${cookies.gkid}`)
+
      useEffect(() => {
           if(cookies.gkid) {
                axios.get(`https://geekarium.herokuapp.com/uses/get/cookie/${cookies.gkid}`)
                .then(resp => {
                     var data = resp.data;
 
-                    document.getElementById("userHeaderBarImage").src = data.data.userPicture;
+                    console.log(data)
+
+                    if(resp.data.data == null) {
+                         console.log(`O usuário com o cookie ${cookies.gkid} não foi encontrado`)
+
+                         function removeItem(sKey, sPath, sDomain) {
+                              document.cookie = encodeURIComponent(sKey) + 
+                                            "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + 
+                                            (sDomain ? "; domain=" + sDomain : "") + 
+                                            (sPath ? "; path=" + sPath : "");
+                          }
+                          
+                         removeItem("gkid");
+                         window.location.reload();
+                    }
+                    else {
+                         document.getElementById("userHeaderBarImage").src = data.data.userPicture;
+                    }
                })
           } 
           if(query.get("ref") == "signupcomplete") {
@@ -119,7 +140,7 @@ export default function HeaderBar() {
                     <div className="user">
                          <FiSearch className="searchButton"/>
                          <button id="headerButton">Publicar</button>
-                         <img src="https://www.mercurynews.com/wp-content/uploads/2019/03/SJM-L-MUSKPOT-0308.jpg?w=490" id="userHeaderBarImage" onClick={openModalProfile} />
+                         <img id="userHeaderBarImage" onClick={openModalProfile} />
                     </div>
 
                     <Modal
@@ -132,7 +153,11 @@ export default function HeaderBar() {
                     >
 
                          <div id="centeredText">
-                              <img src="https://www.mercurynews.com/wp-content/uploads/2019/03/SJM-L-MUSKPOT-0308.jpg?w=490" id="userModalImage" />
+                              <img id="userModalImage" />
+                         </div>
+
+                         <div id="centeredText">
+                              <h2 id="modalProfileUsername" />
                          </div>
 
                          <div id="centeredText">

@@ -14,15 +14,6 @@ export default function UserConception() {
      useEffect(() => {
 
           if(remember == 1) {
-               const today = new Date()
-               const tomorrow = new Date(today)
-               tomorrow.setDate(tomorrow.getDate() + 1)
-
-               setCookie("gkid", id, {
-                    path: "/"
-               })
-
-               console.log("Setando cookie")
      
                function screenChange() {
                     window.location.href = "/"
@@ -33,17 +24,6 @@ export default function UserConception() {
                }, 3000);
           }
           else {
-               const today = new Date()
-               const tomorrow = new Date(today)
-               tomorrow.setDate(tomorrow.getDate() + 1)
-
-               setCookie("gkid", id, {
-                    expires: tomorrow,
-                    path: "/"
-               })
-
-               console.log("Setando cookie")
-     
                function screenChange() {
                     window.location.href = "/"
                }

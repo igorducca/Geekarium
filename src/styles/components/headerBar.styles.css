@@ -212,3 +212,10 @@ body {
 #profileModal #trendingTopicsButton:hover {
      background-color: #b65404;
 }
+
+#profileModal #modalProfileUsername {
+     font-family: 'Open Sans', sans-serif;
+     font-weight: 400;
+     font-style: italic;
+     margin-top: -10px;
+}
