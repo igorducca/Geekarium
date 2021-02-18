@@ -5,9 +5,31 @@ import "../../styles/screens/landing.styles.css"
 
 import HeaderBar from "../../components/headerBar"
 
+import $ from "jquery";
+import axios from "axios";
+
 import { FiTrendingUp, FiThumbsUp, FiStar, FiUsers } from "react-icons/fi";
 
 export default function LoggedLanding() {
+
+     useEffect(() => {
+          axios.get(`https://geekarium.herokuapp.com/trendings/list`)
+          .then(resp => {
+               var data = resp.data.data;
+
+               data.forEach(trending => {
+                    axios.get(`https://geekarium.herokuapp.com/user/get/name/${trending.creator}`)
+                    .then(respp => {
+     
+                         console.log(respp.data)
+
+                         var position = data.indexOf(trending) + 1
+     
+                         $("#trendingTopicLine").append(`<div id="tredingTopic"> <div id="orderNumber"> <h1>${position}</h1> </div> <div id="topicTitle"> <div id="trendingTopicAuthorInfoHolder"> <img src="${respp.data.data.userPicture}" /> <p id="trendingTopicUsername">Por @${trending.creator}</p> </div> <h3>${trending.topicName}</h3> <p>${trending.creationDate} • Leitura de ${trending.readingTime}</p> </div> </div>`)
+                    })  
+               })
+          })
+     }, [])
 
      return (
           <div>
@@ -116,117 +138,7 @@ export default function LoggedLanding() {
                          <h2>Tópicos em alta</h2>
                     </div>
 
-                    <div id="trendingTopicLine">
-                         <div id="tredingTopic">
-                              <div id="orderNumber">
-                                   <h1>01</h1>
-                              </div>
-
-                              <div id="topicTitle">
-
-                                   <div id="trendingTopicAuthorInfoHolder">
-                                        <img src="https://fastly.syfy.com/sites/syfy/files/styles/1200x680/public/calcifer-howls-moving-castle.jpg?offset-y=0" />
-                                        <p id="trendingTopicUsername">Por Igor Duca</p>
-                                   </div> 
-
-                                   <h3>Programação para iniciantes</h3>
-
-                                   <p>16/02/2021 • Leitura rápida</p>
-                              </div>
-                         </div>
-
-                         <div id="tredingTopic">
-                              <div id="orderNumber">
-                                   <h1>02</h1>
-                              </div>
-
-                              <div id="topicTitle">
-
-                                   <div id="trendingTopicAuthorInfoHolder">
-                                        <img src="https://fastly.syfy.com/sites/syfy/files/styles/1200x680/public/calcifer-howls-moving-castle.jpg?offset-y=0" />
-                                        <p id="trendingTopicUsername">Por Igor Duca</p>
-                                   </div> 
-
-                                   <h3>Programação para iniciantes</h3>
-
-                                   <p>16/02/2021 • Leitura rápida</p>
-                              </div>
-                         </div>
-
-                         <div id="tredingTopic">
-                              <div id="orderNumber">
-                                   <h1>03</h1>
-                              </div>
-
-                              <div id="topicTitle">
-
-                                   <div id="trendingTopicAuthorInfoHolder">
-                                        <img src="https://fastly.syfy.com/sites/syfy/files/styles/1200x680/public/calcifer-howls-moving-castle.jpg?offset-y=0" />
-                                        <p id="trendingTopicUsername">Por Igor Duca</p>
-                                   </div> 
-
-                                   <h3>Programação para iniciantes</h3>
-
-                                   <p>16/02/2021 • Leitura rápida</p>
-                              </div>
-                         </div>
-                    </div>
-
-                    <div id="trendingTopicLine">
-                         <div id="tredingTopic">
-                              <div id="orderNumber">
-                                   <h1>04</h1>
-                              </div>
-
-                              <div id="topicTitle">
-
-                                   <div id="trendingTopicAuthorInfoHolder">
-                                        <img src="https://fastly.syfy.com/sites/syfy/files/styles/1200x680/public/calcifer-howls-moving-castle.jpg?offset-y=0" />
-                                        <p id="trendingTopicUsername">Por Igor Duca</p>
-                                   </div> 
-
-                                   <h3>Programação para iniciantes</h3>
-
-                                   <p>16/02/2021 • Leitura rápida</p>
-                              </div>
-                         </div>
-
-                         <div id="tredingTopic">
-                              <div id="orderNumber">
-                                   <h1>05</h1>
-                              </div>
-
-                              <div id="topicTitle">
-
-                                   <div id="trendingTopicAuthorInfoHolder">
-                                        <img src="https://fastly.syfy.com/sites/syfy/files/styles/1200x680/public/calcifer-howls-moving-castle.jpg?offset-y=0" />
-                                        <p id="trendingTopicUsername">Por Igor Duca</p>
-                                   </div> 
-
-                                   <h3>Programação para iniciantes</h3>
-
-                                   <p>16/02/2021 • Leitura rápida</p>
-                              </div>
-                         </div>
-
-                         <div id="tredingTopic">
-                              <div id="orderNumber">
-                                   <h1>06</h1>
-                              </div>
-
-                              <div id="topicTitle">
-
-                                   <div id="trendingTopicAuthorInfoHolder">
-                                        <img src="https://fastly.syfy.com/sites/syfy/files/styles/1200x680/public/calcifer-howls-moving-castle.jpg?offset-y=0" />
-                                        <p id="trendingTopicUsername">Por Igor Duca</p>
-                                   </div> 
-
-                                   <h3>Programação para iniciantes</h3>
-
-                                   <p>16/02/2021 • Leitura rápida</p>
-                              </div>
-                         </div>
-                    </div>
+                    <div id="trendingTopicLine" />
                </div>
 
                <hr />
