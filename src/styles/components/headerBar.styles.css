@@ -1,3 +1,7 @@
+body {
+     scroll-behavior: smooth;
+}
+
 .content {
      height: 200px;
      padding: 20px;
@@ -17,10 +21,17 @@
      align-items: center;
 }
 
+.content .title img {
+     height: 50px;
+     width: 50px;
+     margin-right: 10px;
+}
+
 .content .user img {
      height: 50px;
      width: 50px;
      border-radius: 50%;
+     cursor: pointer;
 }
 
 .content .user {
@@ -142,4 +153,62 @@
      background-color: #eee;
      outline: none;
      cursor: pointer;
+}
+
+#centeredText {
+     display: flex;
+     justify-content: center;
+}
+
+#profileModal {
+     padding: 50px;
+}
+
+#profileModal button {
+     padding: 10px;
+     width: 200px;
+     background-color: #121212;
+     color: white;
+     font-family: 'Roboto', sans-serif;
+     border-radius: 8px;
+     border: none;
+     font-size: 18px;
+     cursor: pointer;
+     transition: .2s ease;
+     margin-bottom: 20px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+
+#profileModal button:hover {
+     background-color: #222121;
+}
+
+#profileModal img {
+     height: 100px;
+     width: 100px;
+     border-radius: 50%;
+     margin-bottom: 20px;
+}
+
+#profileModal #trendingTopicsButton {
+     padding: 10px;
+     width: 200px;
+     background-color: #ff7300;
+     color: white;
+     font-family: 'Roboto', sans-serif;
+     border-radius: 8px;
+     border: none;
+     font-size: 18px;
+     cursor: pointer;
+     transition: .2s ease;
+     margin-bottom: 20px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+
+#profileModal #trendingTopicsButton:hover {
+     background-color: #b65404;
 }

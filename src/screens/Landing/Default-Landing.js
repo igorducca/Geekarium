@@ -7,11 +7,7 @@ import HeaderBar from "../../components/headerBar"
 
 import { FiTrendingUp, FiThumbsUp, FiStar, FiUsers } from "react-icons/fi";
 
-import LoadData from "../../scripts/loadData.js"
-
 export default function DefaultLanding() {
-
-     LoadData()
 
      return (
           <div>

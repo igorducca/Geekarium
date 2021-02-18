@@ -1,16 +1,26 @@
-import React, { useState } from "react";
-import { FiSearch, FiLogIn, FiLock, FiSkipBack } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { FiSearch, FiLogIn, FiLock, FiUser } from "react-icons/fi";
+import { FaFire } from "react-icons/fa"
+import { Link, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import axios from "axios";
+
+import Logo from "../assets/geekarium-logo.png"
 
 import Login from "../scripts/Login";
+import Signup from "../scripts/Signup";
 
 import Modal from "react-modal";
 import "react-modal/dist/react-modal"
-
 import "../styles/components/headerBar.styles.css"
 
 export default function HeaderBar() {
+
+     function useQuery() {
+          return new URLSearchParams(useLocation().search);
+     }
+
+     let query = useQuery();
 
      const [ username, setUsername ] = useState("");
      const [ password, setPassword ] = useState("");
@@ -28,6 +38,7 @@ export default function HeaderBar() {
 
      const [modalLoginIsOpen, setLoginIsOpen] = React.useState(false);
      const [modalSignupIsOpen, setSignpIsOpen] = React.useState(false);
+     const [modalProfileIsOpen, setProfileIsOpen] = React.useState(false);
 
      function openModalLogin() {
           setLoginIsOpen(true);
@@ -43,6 +54,19 @@ export default function HeaderBar() {
 
      function closeModalSignup(){
           setSignpIsOpen(false);
+     }
+
+     function openModalProfile() {
+          axios.get(`https://geekarium.herokuapp.com/uses/get/cookie/${cookies.gkid}`)
+          .then(resp => {
+               var data = resp.data;
+               setProfileIsOpen(true);
+               document.getElementById("userModalImage").src = data.data.userPicture;
+          })
+     }
+
+     function closeModalProfile(){
+          setProfileIsOpen(false);
      }
 
      var today = new Date()
@@ -62,12 +86,32 @@ export default function HeaderBar() {
           setSignpIsOpen(true);
      }
 
+     function goToTrendingTopics() {
+          setProfileIsOpen(false);
+          document.getElementById("trendingGeekTopics").scrollIntoView({ behavior: 'smooth', block: 'end'});
+     }
+
      const [cookies, setCookie] = useCookies(["gkid"]);
+
+     useEffect(() => {
+          if(cookies.gkid) {
+               axios.get(`https://geekarium.herokuapp.com/uses/get/cookie/${cookies.gkid}`)
+               .then(resp => {
+                    var data = resp.data;
+
+                    document.getElementById("userHeaderBarImage").src = data.data.userPicture;
+               })
+          } 
+          if(query.get("ref") == "signupcomplete") {
+               setLoginIsOpen(true);
+          }
+     }, [])
 
      if(cookies.gkid) {
           return (
                <div className="content">
                     <div className="title">
+                         <img src={Logo} />
                          <h1>Geekarium |</h1>
                          <h2 style={{marginLeft:"20px"}}>{hourTitle}</h2>
                     </div>
@@ -75,8 +119,30 @@ export default function HeaderBar() {
                     <div className="user">
                          <FiSearch className="searchButton"/>
                          <button id="headerButton">Publicar</button>
-                         <img src="https://www.mercurynews.com/wp-content/uploads/2019/03/SJM-L-MUSKPOT-0308.jpg?w=490"/>
+                         <img src="https://www.mercurynews.com/wp-content/uploads/2019/03/SJM-L-MUSKPOT-0308.jpg?w=490" id="userHeaderBarImage" onClick={openModalProfile} />
                     </div>
+
+                    <Modal
+                         isOpen={modalProfileIsOpen}
+                         onRequestClose={closeModalProfile}
+                         style={customStyles}
+                         contentLabel="Modal de Login"
+                         id="profileModal"
+                         ariaHideApp={false}
+                    >
+
+                         <div id="centeredText">
+                              <img src="https://www.mercurynews.com/wp-content/uploads/2019/03/SJM-L-MUSKPOT-0308.jpg?w=490" id="userModalImage" />
+                         </div>
+
+                         <div id="centeredText">
+                              <button> <FiUser style={{marginRight:"10px"}} /> Meu perfil</button>
+                         </div>
+
+                         <div id="centeredText" onClick={goToTrendingTopics}>
+                              <button id="trendingTopicsButton"> <FaFire style={{marginRight:"10px"}} type="button" />Tópicos em alta</button>
+                         </div>
+                    </Modal>
                </div>
           )
      }
@@ -118,6 +184,11 @@ export default function HeaderBar() {
                               <input placeholder="Senha" type="password" onChange={(key) => { setPassword(key.target.value) }} value={password} id="loginPasswordInput"/>
                          </div>
 
+                         <div className="rememberMeCheckbox">
+                              <input type="checkbox" id="rememberMeCheckbox"/>
+                              <p style={{marginLeft:"20px"}}>Lembrar-se de mim</p>
+                         </div>
+
                          <div className="loginButtonWrapper">
                               <button onClick={Login} type="button">Login</button>
                          </div>
@@ -144,21 +215,16 @@ export default function HeaderBar() {
 
                          <div className="loginInputWrapper">
                               <FiLogIn style={{fontSize:"24px", marginRight:"10px"}}/>
-                              <input placeholder="Nome de usuário" />
+                              <input placeholder="Nome de usuário" id="signupInputUsername"/>
                          </div>
 
                          <div className="loginInputWrapper">
                               <FiLock style={{fontSize:"24px", marginRight:"10px"}}/>
-                              <input placeholder="Senha" type="password"/>
-                         </div>
-
-                         <div className="rememberMeCheckbox">
-                              <input type="checkbox" />
-                              <p style={{marginLeft:"20px"}}>Lembrar-se de mim</p>
+                              <input placeholder="Senha" type="password" id="signupInputPassword"/>
                          </div>
 
                          <div className="loginButtonWrapper">
-                              <button type="button">Criar</button>
+                              <button type="button" onClick={Signup} >Criar</button>
                          </div>
                     </Modal>
                </div>

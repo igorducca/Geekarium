@@ -1,0 +1,15 @@
+#loaderWrapper {
+     font-family: 'Roboto', sans-serif;
+     font-weight: 900;
+     align-items: center;
+}
+
+#userConceptContent {
+     display: flex;
+     justify-content: center;
+}
+
+#loaderHolder {
+     display: flex;
+     justify-content: center;
+}
