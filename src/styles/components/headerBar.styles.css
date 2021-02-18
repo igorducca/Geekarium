@@ -1,5 +1,6 @@
 body {
      scroll-behavior: smooth;
+     margin: 0;
 }
 
 .content {
@@ -218,4 +219,42 @@ body {
      font-weight: 400;
      font-style: italic;
      margin-top: -10px;
+}
+
+#joinUsButton {
+     background-color: white;
+     color: black;
+     font-family: 'Roboto', sans-serif;
+     padding: 10px;
+     border-radius: 8px;
+     border: none;
+     font-size: 16px;
+     cursor: pointer;
+     transition: .2s ease;
+}
+
+#joinUsButton:hover {
+     background-color: #222121;
+}
+
+#NotLoggedContent {
+     background-color: #121212;
+     color: white;
+     border-bottom: 3px solid #1ca72a;
+}
+
+#NotLoggedContent .searchButton {
+     color: white;
+}
+
+#NotLoggedContent button:hover {
+     background-color: #1ca72a;
+     color: white;
+}
+
+#NotLoggedContent .user #enterButton {
+     font-family: 'Roboto', sans-serif;
+     font-size: 16px;
+     margin-right: 20px;
+     cursor: pointer;
 }

@@ -16,7 +16,7 @@ export default function Login() {
      })
      .then(resp => {
 
-          console.log(`First data: ${resp.data}`)
+          console.log(resp.data)
 
           if(resp.data.sucesso == true) {
                axios.get(`https://geekarium.herokuapp.com/cookie/generate/${resp.data.userId}`)

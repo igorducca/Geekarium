@@ -1,0 +1,33 @@
+#mainContentHolder {
+     padding: 50px;
+     border-bottom: 3px solid #1ca72a;
+}
+
+#mainContentHolder #mainContentTitle h1{
+     font-family: 'Roboto', sans-serif;
+     font-size: 48px;
+     max-width: 700px;
+}
+
+#mainContentHolder #mainContentTitle {
+     display: flex;
+     align-items: center;
+     margin-top: -50px;
+}
+
+#landingTrendingTopics #trendingTopicsTitle {
+     display: flex;
+     align-items: center;
+     font-size: 24px;
+     font-family: 'Roboto', sans-serif;
+}
+
+#landingTrendingTopics {
+     background-color: #b65404;
+     padding: 50px;
+     color: white;
+}
+
+#landingTrendingTopics #trendingTopicLine #orderNumber h1 {
+     color: white;
+}

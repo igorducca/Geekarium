@@ -130,7 +130,7 @@ export default function HeaderBar() {
 
      if(cookies.gkid) {
           return (
-               <div className="content">
+               <div className="content" id="loggedContent">
                     <div className="title">
                          <img src={Logo} />
                          <h1>Geekarium |</h1>
@@ -173,7 +173,7 @@ export default function HeaderBar() {
      }
      else {
           return (
-               <div className="content">
+               <div className="content" id="NotLoggedContent">
                     <div className="title">
                          <img src={Logo} />
                          <h1>Geekarium |</h1>
@@ -182,8 +182,8 @@ export default function HeaderBar() {
      
                     <div className="user">
                          <FiSearch className="searchButton"/>
-                         <button id="headerButton" onClick={openModalLogin}>Login</button>
-                         <button id="headerButton" onClick={openModalSignup} >Cadastrar</button>
+                         <a id="enterButton" onClick={openModalLogin}>Entrar</a>
+                         <button id="joinUsButton" onClick={openModalSignup}>Juntar-se</button>
                     </div>
                     <Modal
                          isOpen={modalLoginIsOpen}
