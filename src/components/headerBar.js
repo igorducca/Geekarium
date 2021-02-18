@@ -150,6 +150,7 @@ export default function HeaderBar() {
           return (
                <div className="content">
                     <div className="title">
+                         <img src="https://www.mercurynews.com/wp-content/uploads/2019/03/SJM-L-MUSKPOT-0308.jpg?w=490" id="userHeaderBarImage" onClick={openModalProfile} />
                          <h1>Geekarium |</h1>
                          <h2 style={{marginLeft:"20px"}}>{hourTitle}</h2>
                     </div>
