@@ -1,0 +1,71 @@
+#publiTitle {
+     background-image: url("https://www.einerd.com.br/wp-content/uploads/2021/02/Mortal-Kombat-trailer-capa.jpg");
+     padding: 100px;
+     margin: 0;
+}
+
+#publiTitle #publiTitleHolder {
+     display: flex;
+     justify-content: center;
+}
+
+#authorNameTitle {
+     color: #1ca72a;
+     font-weight: 400;
+     font-weight: bold;
+     text-decoration: none;
+}
+
+#publiTitle h1 {
+     font-family: 'Roboto', sans-serif;
+     color: white;
+     max-width: 700px;
+}
+
+#publiDetailsHolder {
+     font-family: 'Open Sans', sans-serif;
+     font-weight: 400;
+     font-style: italic;
+     padding: 20px;
+     display: flex;
+     align-items: center;
+     border-bottom: 2px solid #1ca72a;
+}
+
+#publiDetailsHolder .userAndImage {
+     display: flex;
+     align-items: center;
+}
+
+#publiDetailsHolder h2 {
+     font-size: 18px;
+}
+
+#publiDetailsHolder img {
+     height: 50px;
+     width: 50px;
+     border-radius: 50%;
+}
+
+#publiDetailsHolder #authorNameTitle {
+     margin-left: 10px;
+}
+
+#publiDetailsHolder .readingTime {
+     margin-left: 20px;
+     display: flex;
+     align-items: center;
+}
+
+#publiTextHolder {
+     display: flex;
+     justify-content: center;
+}
+
+#publiText {
+     padding: 50px;
+     font-family: 'Roboto', sans-serif;
+     max-width: 900px;
+     font-size: 30px;
+     text-align: justify;
+}

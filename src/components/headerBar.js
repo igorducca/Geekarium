@@ -139,7 +139,7 @@ export default function HeaderBar() {
      
                     <div className="user">
                          <FiSearch className="searchButton"/>
-                         <button id="headerButton">Publicar</button>
+                         <button id="headerButton" onClick={() => { window.location.href="/publi" }}>Publicar</button>
                          <img id="userHeaderBarImage" onClick={openModalProfile} />
                     </div>
 

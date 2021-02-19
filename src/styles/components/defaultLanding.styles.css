@@ -31,3 +31,8 @@
 #landingTrendingTopics #trendingTopicLine #orderNumber h1 {
      color: white;
 }
+
+#trendingTopicLine #trendingNull {
+     max-width: 700px;
+     font-family: 'Roboto', sans-serif;
+}

@@ -1,0 +1,107 @@
+#pageTitle {
+     font-family: 'Roboto', sans-serif;
+     background-color: #1ca72a;
+     color: white;
+     padding: 50px;
+     border-bottom: 3px solid black;
+}
+
+#pageTitle .title {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+
+#pageTitle #authorPreview {
+     display: flex;
+     justify-content: center;
+     font-family: 'Open Sans', sans-serif;
+     font-weight: 400;
+     font-style: italic;
+}
+
+#editorHolder {
+     margin-top: 50px;
+}
+
+#previewHr {
+     width: 700px;
+     border: 1px solid #949494;
+     border-radius: 16px;
+     margin-top: 20px;
+}
+
+#previewTitle {
+     font-family: 'Roboto', sans-serif;
+     color: black;
+     display: flex;
+     justify-content: center;
+}
+
+#previewHolder {
+     display: flex;
+     justify-content: center;
+     max-width: 700px;
+     padding: 50px;
+}
+
+.inputHolder #publiName {
+     border: none;
+     background-color: #1ca72a;
+     border-bottom: 2px solid white;
+     width: 400px;
+     margin-top: 20px;
+     font-family: 'Open Sans', sans-serif;
+     font-weight: 400;
+     font-style: italic;
+     color: white;
+     text-align: center;
+     outline: none;
+     font-size: 24px;
+}
+
+.inputHolder {
+     display: flex;
+     justify-content: center;
+}
+
+.publiButtonHolder {
+     display: flex;
+     justify-content: center;
+}
+
+.publiButtonHolder #publiButton {
+     background-color: black;
+     font-family: 'Roboto', sans-serif;
+     padding: 10px;
+     color: white;
+     border: none;
+     border-radius: 8px;
+     font-size: 18px;
+     margin-bottom: 20px;
+     cursor: pointer;
+}
+
+.timeSelectHolder {
+     display: flex;
+     justify-content: center;
+}
+
+.timeSelectHolder #timeSelect {
+     padding: 20px;
+     border: none;
+     background-color: #1ca72a;
+     border: 2px solid white;
+     border-radius: 8px;
+     outline: none;
+     color: white;
+     margin-top: 20px;
+     width: 500px;
+     font-family: 'Roboto', sans-serif;
+     font-size: 18px;
+     text-align: center;
+}
+
+.timeSelectHolder #timeSelect:focus {
+     outline: none;
+}

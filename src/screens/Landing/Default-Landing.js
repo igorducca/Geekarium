@@ -22,12 +22,16 @@ export default function DefaultLanding() {
                data.forEach(trending => {
                     axios.get(`https://geekarium.herokuapp.com/user/get/name/${trending.creator}`)
                     .then(respp => {
-     
-                         console.log(respp.data)
+                         if(respp.data.data != null) {
+                              console.log(respp.data)
 
-                         var position = data.indexOf(trending) + 1
-     
-                         $("#trendingTopicLine").append(`<div id="tredingTopic"> <div id="orderNumber"> <h1>${position}</h1> </div> <div id="topicTitle"> <div id="trendingTopicAuthorInfoHolder"> <img src="${respp.data.data.userPicture}" /> <p id="trendingTopicUsername">Por @${trending.creator}</p> </div> <h3>${trending.topicName}</h3> <p>${trending.creationDate} • Leitura de ${trending.readingTime}</p> </div> </div>`)
+                              var position = data.indexOf(trending) + 1
+          
+                              $("#trendingTopicLine").append(`<div id="tredingTopic"> <div id="orderNumber"> <h1>${position}</h1> </div> <div id="topicTitle"> <div id="trendingTopicAuthorInfoHolder"> <img src="${respp.data.data.userPicture}" /> <p id="trendingTopicUsername">Por @${trending.creator}</p> </div> <h3>${trending.topicName}</h3> <p>${trending.creationDate} • Leitura de ${trending.readingTime}</p> </div> </div>`)
+                         }
+                         else {
+                              $("#trendingTopicLine").append(`<h1 id="trendingNull"> 🥶 Me desculpe, mas eu não encontrei nenhum trending topic </h1>`)
+                         }
                     })  
                })
           })
