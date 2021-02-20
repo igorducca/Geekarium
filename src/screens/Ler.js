@@ -5,6 +5,7 @@ import $ from "jquery";
 import { useCookies } from "react-cookie";
 
 import { FiClock } from "react-icons/fi";
+import { FaHome } from "react-icons/fa"
 
 import "../styles/screens/read.styles.css";
 
@@ -14,8 +15,10 @@ export default function Ler() {
 
      let { name } = useParams();
 
-     if(cookies.gkid) {
-          useEffect(() => {
+     console.log(name)
+
+     useEffect(() => {
+          if(cookies.gkid) {
                axios.get(`https://geekarium.herokuapp.com/get/publi/${name}`)
                .then(resp => {
                     var data = resp.data.data;
@@ -25,16 +28,29 @@ export default function Ler() {
                     document.getElementById("authorNameTitle").innerText = `Matéria escrita por @${data.publiAuthor}`;
                     document.getElementById("readTime").innerText = `Leitura de ${data.publiReadTime}`
                     document.getElementById("authorNameTitle").href = `/perfil/${data.publiAuthor}`
+                    document.getElementById("publiTitle").style.backgroundImage = `url("${data.publiThumbnail}")`
+                    document.getElementById("publiTitlePrev").innerText = `${data.publiTitle}`
                     
                     $("#publiText").append(`<p> ${data.publiText} </p>`)
                })
-          }, [])
+          }
+          else return false;
+     }, [])
+
+     if(cookies.gkid) {
      
           return (
                <div>
                     <div id="publiTitle">
-                         <div id="publiTitleHolder">
-                              <h1>Mortal Kombat: com violência e menção ao Brasil, 1º trailer do filme é divulgado; assista</h1>
+
+                         <div id="homeButtonHolder">
+                              <a href="/"><FaHome /></a>
+                         </div>
+
+                         <div id="paddingAppliedDiv">
+                              <div id="publiTitleHolder">
+                                   <h1 id="publiTitlePrev" />
+                              </div> 
                          </div>
                     </div>
      

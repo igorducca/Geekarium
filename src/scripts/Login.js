@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useCookies, cookie } from "react-cookie";
+import $ from "jquery";
 
 export default function Login() {
 
@@ -51,6 +52,9 @@ export default function Login() {
                          }
                     }
                })
+          }
+          if(resp.data.sucesso == false) {
+               $("#loginErrorDiv").append(`<h2> ${resp.data.mensagem} </h2>`)
           }
      })
 }

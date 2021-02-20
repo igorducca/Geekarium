@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { FiSearch, FiLogIn, FiLock, FiUser, FiEye } from "react-icons/fi";
-import { FaFire } from "react-icons/fa"
+import { FiSearch, FiLogIn, FiLock, FiUser, FiEye, FiBell } from "react-icons/fi";
+import { FaFire, FaDoorOpen } from "react-icons/fa"
 import { Link, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
+import $ from "jquery";
 
 import Logo from "../assets/geekarium-logo.png"
 
@@ -39,6 +40,7 @@ export default function HeaderBar() {
      const [modalLoginIsOpen, setLoginIsOpen] = React.useState(false);
      const [modalSignupIsOpen, setSignpIsOpen] = React.useState(false);
      const [modalProfileIsOpen, setProfileIsOpen] = React.useState(false);
+     const [modalNotifyIsOpen, setNotifyIsOpen] = React.useState(false);
 
      function openModalLogin() {
           setLoginIsOpen(true);
@@ -56,6 +58,28 @@ export default function HeaderBar() {
           setSignpIsOpen(false);
      }
 
+     function openNotifyModal() {
+          setNotifyIsOpen(true);
+
+          axios.get(`https://geekarium.herokuapp.com/uses/get/cookie/${cookies.gkid}`)
+          .then(resp => {
+               var data = resp.data.data;
+
+               axios.get(`https://geekarium.herokuapp.com/user/notify/${data.userId}`)
+               .then(respp => {
+                    var notifyAll = respp.data.data;
+
+                    notifyAll.forEach(notify => {
+                         $("#notifyDisplayer").append(` <li id="generatedNotifyLi"> <div id="generatedNotify"> <h2>🔔 ${notify.notifyTitle}</h2> <h3>${notify.notifyBody}</h3> </div> </li> `)
+                    })
+               })
+          })
+     }
+
+     function closeNotifyModal() {
+          setNotifyIsOpen(false);
+     }
+
      function openModalProfile() {
           axios.get(`https://geekarium.herokuapp.com/uses/get/cookie/${cookies.gkid}`)
           .then(resp => {
@@ -64,6 +88,7 @@ export default function HeaderBar() {
                setProfileIsOpen(true);
                document.getElementById("userModalImage").src = data.data.userPicture;
                document.getElementById("modalProfileUsername").innerText = `@${data.data.screen_name}`
+               document.getElementById("profileUrlHolder").href = `/perfil/${data.data.screen_name}`
           })
      }
 
@@ -91,6 +116,18 @@ export default function HeaderBar() {
      function goToTrendingTopics() {
           setProfileIsOpen(false);
           document.getElementById("trendingGeekTopics").scrollIntoView({ behavior: 'smooth', block: 'end'});
+     }
+
+     function logout() {
+          function removeItem(sKey, sPath, sDomain) {
+               document.cookie = encodeURIComponent(sKey) + 
+                             "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + 
+                             (sDomain ? "; domain=" + sDomain : "") + 
+                             (sPath ? "; path=" + sPath : "");
+           }
+           
+          removeItem("gkid");
+          window.location.reload();
      }
 
      const [cookies, setCookie] = useCookies(["gkid"]);
@@ -122,6 +159,18 @@ export default function HeaderBar() {
                          document.getElementById("userHeaderBarImage").src = data.data.userPicture;
                     }
                })
+
+               axios.get(`https://geekarium.herokuapp.com/uses/get/cookie/${cookies.gkid}`)
+               .then(respp => {
+                    var firstData = respp.data.data;
+
+                    axios.get(`https://geekarium.herokuapp.com/user/notify/${firstData.userId}`)
+                    .then(resp => {
+                         var data = resp.data.data;
+     
+                         if(data.length >= 1) return document.getElementById("notifyBell").style.color = "#1ca72a"
+                    })
+               })
           } 
           if(query.get("ref") == "signupcomplete") {
                setLoginIsOpen(true);
@@ -139,6 +188,7 @@ export default function HeaderBar() {
      
                     <div className="user">
                          <FiSearch className="searchButton"/>
+                         <FiBell className="searchButton" onClick={openNotifyModal} id="notifyBell"/>
                          <button id="headerButton" onClick={() => { window.location.href="/publi" }}>Publicar</button>
                          <img id="userHeaderBarImage" onClick={openModalProfile} />
                     </div>
@@ -161,11 +211,30 @@ export default function HeaderBar() {
                          </div>
 
                          <div id="centeredText">
-                              <button> <FiUser style={{marginRight:"10px"}} /> Meu perfil</button>
+                              <a id="profileUrlHolder"><button> <FiUser style={{marginRight:"10px"}} /> Meu perfil</button></a>
                          </div>
 
                          <div id="centeredText" onClick={goToTrendingTopics}>
                               <button id="trendingTopicsButton"> <FaFire style={{marginRight:"10px"}} type="button" />Tópicos em alta</button>
+                         </div>
+
+                         <div id="centeredText" onClick={logout}>
+                              <button id="logoutModalButton"> <FaDoorOpen style={{marginRight:"10px"}} type="button" />Sair</button>
+                         </div>
+                    </Modal>
+                    <Modal
+                         isOpen={modalNotifyIsOpen}
+                         onRequestClose={closeNotifyModal}
+                         style={customStyles}
+                         contentLabel="Modal de Login"
+                         id="notifyModal"
+                    >
+                         <div id="notifyModalTitleHolder">
+                              <h1>Suas notificações</h1>
+                         </div>
+
+                         <div id="notifyDisplayerHolder">
+                              <ul id="notifyDisplayer" />
                          </div>
                     </Modal>
                </div>
@@ -214,6 +283,8 @@ export default function HeaderBar() {
                               <input type="checkbox" id="rememberMeCheckbox"/>
                               <p style={{marginLeft:"20px"}}>Lembrar-se de mim</p>
                          </div>
+
+                         <div id="loginErrorDiv" />
 
                          <div className="loginButtonWrapper">
                               <button onClick={Login} type="button">Login</button>

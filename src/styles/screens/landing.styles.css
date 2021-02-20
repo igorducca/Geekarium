@@ -295,3 +295,50 @@
      font-weight: 900;
      font-family: 'Roboto', sans-serif;
 }
+
+#userRenderLine {
+     display: flex;
+     align-items: center;
+}
+
+#userRenderHolder {
+     padding: 50px;
+}
+
+#userRenderLine #userRender img {
+     height: 80px;
+     width: 80px;
+     border-radius: 50%;
+}
+
+#userRender {
+     align-items: center;
+     display: flex;
+     margin-right: 50px;
+}
+
+#userRenderHolder {
+     display: flex;
+     align-items: center;
+}
+
+#userRender #usernameFollowHolder {
+     margin-left: 20px;
+     align-items: center;
+}
+
+#userRender #usernameFollowHolder {
+     font-family: 'Open Sans', sans-serif;
+     font-weight: 400;
+     font-style: italic;
+}
+
+#userRender #usernameFollowHolder #suggestUserFollowButton {
+     padding: 10px;
+     font-family: 'Roboto', sans-serif;
+     background-color: #121212;
+     color: white;
+     border: none;
+     border-radius: 8px;
+     cursor: pointer;
+}

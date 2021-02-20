@@ -214,6 +214,27 @@ body {
      background-color: #b65404;
 }
 
+#profileModal #logoutModalButton {
+     padding: 10px;
+     width: 200px;
+     background-color: rgb(231, 33, 33);
+     color: white;
+     font-family: 'Roboto', sans-serif;
+     border-radius: 8px;
+     border: none;
+     font-size: 18px;
+     cursor: pointer;
+     transition: .2s ease;
+     margin-bottom: 20px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+
+#profileModal #logoutModalButton:hover {
+     background-color: rgb(148, 21, 21);
+}
+
 #profileModal #modalProfileUsername {
      font-family: 'Open Sans', sans-serif;
      font-weight: 400;
@@ -257,4 +278,45 @@ body {
      font-size: 16px;
      margin-right: 20px;
      cursor: pointer;
+}
+
+#loginErrorDiv {
+     font-family: 'Open Sans', sans-serif;
+     font-weight: 400;
+     font-style: italic;
+     font-size: 12px;
+     color: rgb(226, 27, 27);
+}
+
+#notifyModal #notifyModalTitleHolder {
+     display: flex;
+     justify-content: center;
+     font-family: 'Roboto', sans-serif;
+}
+
+#notifyDisplayer li {
+     list-style: none;
+     list-style-type: none;
+     padding: 0px;
+}
+
+#notifyDisplayer #generatedNotify {
+     padding: 20px;
+     background-color: #121212;
+     color: white;
+     border-radius: 8px;
+}
+
+#notifyDisplayer #generatedNotifyLi {
+     margin-bottom: 20px;
+}
+
+#notifyDisplayer #generatedNotify h2 {
+     font-family: 'Roboto', sans-serif;
+}
+
+#notifyDisplayer #generatedNotify h3 {
+     font-family: 'Open Sans', sans-serif;
+     font-weight: 400;
+     font-style: italic;
 }

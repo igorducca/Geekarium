@@ -1,7 +1,9 @@
 #publiTitle {
-     background-image: url("https://www.einerd.com.br/wp-content/uploads/2021/02/Mortal-Kombat-trailer-capa.jpg");
-     padding: 100px;
      margin: 0;
+}
+
+#paddingAppliedDiv {
+     padding: 100px;
 }
 
 #publiTitle #publiTitleHolder {
@@ -68,4 +70,14 @@
      max-width: 900px;
      font-size: 30px;
      text-align: justify;
+}
+
+#homeButtonHolder {
+     color: white;
+     padding: 20px;
+     font-size: 24px;
+}
+
+#homeButtonHolder a {
+     color: white;
 }

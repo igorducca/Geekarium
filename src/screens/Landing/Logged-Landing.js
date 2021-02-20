@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useCookies } from "react-cookie";
 
 import "../../styles/global.css"
 import "../../styles/screens/landing.styles.css"
@@ -11,6 +12,8 @@ import axios from "axios";
 import { FiTrendingUp, FiThumbsUp, FiStar, FiUsers } from "react-icons/fi";
 
 export default function LoggedLanding() {
+
+     const [cookies, setCookie] = useCookies(["gkid"]);
 
      useEffect(() => {
           axios.get(`https://geekarium.herokuapp.com/trendings/list`)
@@ -29,7 +32,49 @@ export default function LoggedLanding() {
                     })  
                })
           })
+
+          axios.get(`https://geekarium.herokuapp.com/uses/get/cookie/${cookies.gkid}`)
+          .then(respp => {
+
+               axios.get("https://geekarium.herokuapp.com/users/fetch")
+               .then(resp => {
+                   var data = resp.data.data;
+                   var userData = respp.data.data;
+
+                   console.log(userData)
+
+                   var followingAll = userData.following;
+
+                   console.log(followingAll)
+
+                   var followingList = [];
+
+                   followingAll.forEach(following => {
+                        var fT = following.target;
+
+                        followingList.push(fT)
+                   })
+
+                   data.forEach(dbUser => {
+                        if(dbUser.screen_name == userData.screen_name) return false;
+                        if(followingList.includes(dbUser.screen_name)) {
+                              $("#userRenderHolder").append(`<div id="userRenderLine"> <div id="userRender"> <img src="${dbUser.userPicture}" /> <div id="usernameFollowHolder"> <h2>@${dbUser.screen_name}</h2> <h3> ${dbUser.followers.length} seguidores </h3> <button id="suggestUserFollowButton">Seguindo</button> </div> </div> </div>`)
+                        }
+                        else {
+                              $("#userRenderHolder").append(`<div id="userRenderLine"> <div id="userRender"> <img src="${dbUser.userPicture}" /> <div id="usernameFollowHolder"> <h2>@${dbUser.screen_name}</h2> <h3> ${dbUser.followers.length} seguidores </h3> <a href="/follow/${dbUser.screen_name}"> <button id="suggestUserFollowButton">Seguir</button> </a> </div> </div> </div>`)
+                        }
+                   })
+               })
+          })
      }, [])
+
+     $("#suggestUserFollowButton").click(function() {
+          console.log("a")
+     })
+
+     function follow() {
+          console.log("a")
+     }
 
      return (
           <div>
@@ -203,6 +248,8 @@ export default function LoggedLanding() {
                          <FiUsers style={{marginRight:"20px"}}/>
                          <h2>Conheça novas pessoas</h2>
                     </div>
+
+                    <div id="userRenderHolder" />
                </div>
           </div>
      )

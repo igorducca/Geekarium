@@ -1,0 +1,89 @@
+#profileHeaderDiv {
+     background-image: url("https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?ixlib=rb-1.2.1");
+     padding: 50px;
+     background-color: #121212;
+}
+
+#titleHeader {
+     display: flex;
+     align-items: center;
+}
+
+#profileHeaderDiv h1 {
+     color: white;
+     font-family: 'Roboto', sans-serif;
+     margin-left: 20px;
+}
+
+#profileHeaderDiv #userProfileImage {
+     height: 100px;
+     width: 100px;
+     border-radius: 50%;
+     cursor: pointer;
+     transition: .4s ease-in-out;
+}
+
+#profileHeaderDiv #userProfileImage:hover {
+     filter: sepia(100%);
+}
+
+#profileHeaderDiv #dataHolder {
+     display: flex;
+     align-items: center;
+     margin-top: 30px;
+}
+
+#profileHeaderDiv #dataHolder h2 {
+     color: white;
+     font-family: 'Roboto', sans-serif;
+     font-weight: 400;
+     margin-left: 10px;
+}
+
+#profileHeaderDiv #dataHolder #dataContainer {
+     display: flex;
+     align-items: center;
+     margin-right: 20px;
+}
+
+#profileImageTitle {
+     font-family: 'Roboto', sans-serif;
+     display: flex;
+     justify-content: center;
+}
+
+#newImageInputHolder {
+     display: flex;
+     justify-content: center;
+}
+
+#newImageInputHolder #newImageInput {
+     border: none;
+     border-bottom: 2px solid #1ca72a;
+     width: 400px;
+     margin-top: 20px;
+     font-family: 'Open Sans', sans-serif;
+     font-weight: 400;
+     font-style: italic;
+     color: #1ca72a;
+     text-align: center;
+     outline: none;
+     font-size: 24px;
+}
+
+#confirmButtonHolder {
+     display: flex;
+     justify-content: center;
+}
+
+#confirmButtonHolder #confirmButton {
+     padding: 10px;
+     font-family: 'Roboto', sans-serif;
+     background-color: #121212;
+     border: none;
+     color: white;
+     border-radius: 8px;
+     font-size: 16px;
+     margin-top: 20px;
+     cursor: pointer;
+}
