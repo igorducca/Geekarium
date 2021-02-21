@@ -9,27 +9,86 @@ import HeaderBar from "../../components/headerBar"
 import $ from "jquery";
 import axios from "axios";
 
-import { FiTrendingUp, FiThumbsUp, FiStar, FiUsers } from "react-icons/fi";
+import { FiTrendingUp, FiThumbsUp, FiStar, FiUsers, FiArchive } from "react-icons/fi";
 
 export default function LoggedLanding() {
 
      const [cookies, setCookie] = useCookies(["gkid"]);
 
      useEffect(() => {
-          axios.get(`https://geekarium.herokuapp.com/trendings/list`)
+          axios.get(`https://geekarium.herokuapp.com/publis/find`)
           .then(resp => {
                var data = resp.data.data;
 
-               data.forEach(trending => {
-                    axios.get(`https://geekarium.herokuapp.com/user/get/name/${trending.creator}`)
-                    .then(respp => {
-     
-                         console.log(respp.data)
+               var selectedPublis = [];
 
-                         var position = data.indexOf(trending) + 1
-     
-                         $("#trendingTopicLine").append(`<div id="tredingTopic"> <div id="orderNumber"> <h1>${position}</h1> </div> <div id="topicTitle"> <div id="trendingTopicAuthorInfoHolder"> <img src="${respp.data.data.userPicture}" /> <p id="trendingTopicUsername">Por @${trending.creator}</p> </div> <h3>${trending.topicName}</h3> <p>${trending.creationDate} • Leitura de ${trending.readingTime}</p> </div> </div>`)
-                    })  
+               for (var i = 1; i < 4; i++) {
+                    selectedPublis.push(data[Math.floor(Math.random() * data.length)])
+               };
+
+               selectedPublis.forEach(publi => {
+                    axios.get(`https://geekarium.herokuapp.com/user/get/name/${publi.publiAuthor}`)
+                    .then(respp => {
+                         if(respp.data.data != null) {
+                              $("#publiHolder").append(`<a href="/ler/${publi.publiUrlTitle}" id="publiHolderA"> <div id="tredingTopic"> <div id="topicTitle"> <div id="trendingTopicAuthorInfoHolder"> <img src="${respp.data.data.userPicture}" /> <p id="trendingTopicUsername">Por @${publi.publiAuthor}</p> </div> <h3>${publi.publiTitle}</h3> <p>${publi.publiCreationDate} • Leitura de ${publi.publiReadTime}</p> </div> </div> </a>`)
+                         }
+                         else {
+                              $("#trendingTopicLine").append(`<h1 id="trendingNull"> 🥶 Me desculpe, mas eu não encontrei nenhum trending topic </h1>`)
+                         }
+                    })
+               })
+          })
+
+          axios.get(`https://geekarium.herokuapp.com/publis/find`)
+          .then(resp => {
+               var data = resp.data.data;
+
+               var selectedPublis = [];
+
+               for (var i = 1; i < 4; i++) {
+                    selectedPublis.push(data[Math.floor(Math.random() * data.length)])
+               };
+
+               selectedPublis.forEach(publi => {
+                    axios.get(`https://geekarium.herokuapp.com/user/get/name/${publi.publiAuthor}`)
+                    .then(respp => {
+
+                         var userData = respp.data.data;
+
+                         $("#verticalRecomendationUl").append(`<a href="/ler/${publi.publiUrlTitle}" id="recomendedListLiA"> <div id="vListPost"> <div id="vListPostInfoHandler"> <div id="vListAuthorDetails"> <img src="${userData.userPicture}" /> <p>${userData.screen_name}</p> </div> <h3>${publi.publiTitle}</h3> <p>${publi.publiCreationDate}</p> </div> <div id="vListPostThumbSection"> <img src="${publi.publiThumbnail}" /> </div> </div> </a>`)
+                    })
+               })
+          })
+
+          axios.get(`https://geekarium.herokuapp.com/publis/find`)
+          .then(resp => {
+               var data = resp.data.data;
+               var publi = data[Math.floor(Math.random() * data.length)];
+
+               axios.get(`https://geekarium.herokuapp.com/user/get/name/${publi.publiAuthor}`)
+               .then(respp => {
+
+                    var userData = respp.data.data;
+
+                    $("#recomendedHolder").append(`<a id="renderedPostA" href="/ler/${publi.publiUrlTitle}"> <div id="renderedPost"> <div id="mainPostImage"> <img src="${publi.publiThumbnail}" /> </div> <div id="postLegendData"> <img src="${userData.userPicture}" /> <h3>matéria feita por @${userData.screen_name}</h3> </div> <div id="postLegendTitle"> <h1>${publi.publiTitle}</h1> <h3>Saiba mais detalhes lendo a matéria completa.</h3> </div> </div> </a>`)
+               })
+          })
+
+          axios.get("https://geekarium.herokuapp.com/users/fetch")
+          .then(resp => {
+               var data = resp.data.data;
+
+               var selectedProfiles = [];
+
+               for (var i = 1; i < 4; i++) {
+                    selectedProfiles.push(data[Math.floor(Math.random() * data.length)])
+               };
+
+               selectedProfiles.forEach(user => {
+
+                    console.log(user)
+
+                    $("#recomendedProfiles").append(`<a href="/perfil/${user.screen_name}" id="userLiA" > <li> <img src="${user.userPicture}" /> </li> </a>`)
                })
           })
 
@@ -81,75 +140,11 @@ export default function LoggedLanding() {
                <HeaderBar />
 
                <div className="postsHolder">
-                    <div className="recomended">
-                         <div id="renderedPost">
-                              <div id="mainPostImage">
-                                   <img src="https://rollingstone.uol.com.br/media/_versions/wanda-pietro-wandavision-ep6_widelg.jpg" />
-                              </div>
-
-                              <div id="postLegendData">
-                                   <img src="https://i.pinimg.com/originals/a3/f3/e7/a3f3e74b0bca67c0538383efb32c402c.png" />
-                                   <h3>matéria feita por Igor Duca</h3>
-                              </div>
-
-                              <div id="postLegendTitle">
-                                   <h1>WandaVision - O Mercúrio é uma representação de Mephisto?</h1>
-                                   <h3>Sabia mais detalhes sobre a misteriosa aparição do Mercúrio na série WandaVision.</h3>
-                              </div>
-                         </div>
-                    </div>
+                    <div className="recomended" id="recomendedHolder" />
 
                     <div className="verticalRecomendations">
                          <ul>
-                              <li>
-                                   <div id="vListPost">
-                                        <div id="vListPostInfoHandler">
-                                             <div id="vListAuthorDetails">
-                                                  <img src="https://yt3.ggpht.com/ytc/AAUvwnh9_CkLaV-M2viRDvtgnmqqhr2EoXvjeSLurcbi=s88-c-k-c0x00ffffff-no-rj" />
-                                                  <p>Pop Show Tv</p>
-                                             </div>
-
-                                             <h3>A emocionante história por trás de Rocky</h3>
-
-                                             <p>16/02/2021</p>
-                                        </div>
-                                        <div id="vListPostThumbSection">
-                                             <img src="https://i.ytimg.com/vi/-IFrkkZoQtc/hqdefault.jpg?sqp=-oaymwEjCPYBEIoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLBKXjcoLKm28qrSdSq1O6NNgJJtcQ" />
-                                        </div>
-                                   </div>
-
-                                   <div id="vListPost">
-                                        <div id="vListPostInfoHandler">
-                                             <div id="vListAuthorDetails">
-                                                  <img src="https://freepikpsd.com/wp-content/uploads/2019/10/css-png-Transparent-Images.png" />
-                                                  <p>Css Guru</p>
-                                             </div>
-
-                                             <h3>Veja os melhores truques de css para 2021</h3>
-
-                                             <p>16/02/2021</p>
-                                        </div>
-                                        <div id="vListPostThumbSection">
-                                             <img src="https://www.freecodecamp.org/news/content/images/2020/12/fcc-bg-image-2.png" />
-                                        </div>
-                                   </div>
-
-                                   <div id="vListPost">
-                                        <div id="vListPostInfoHandler">
-                                             <div id="vListAuthorDetails">
-                                                  <img src="https://www.einerd.com.br/wp-content/uploads/2017/04/ei-nerd-logo.png" />
-                                                  <p>Ei Nerd</p>
-                                             </div>
-
-                                             <h3>Após demissão de The Mandalorian, Gina Carano anuncia filme com site conservador</h3>
-
-                                             <p>16/02/2021</p>
-                                        </div>
-                                        <div id="vListPostThumbSection">
-                                             <img src="https://www.einerd.com.br/wp-content/uploads/2021/02/Gina-Carano-demissao-the-mandalorian-capa.jpg" />
-                                        </div>
-                                   </div>
-                              </li>
+                              <li id="verticalRecomendationUl" />
                          </ul>
                     </div>
 
@@ -157,33 +152,23 @@ export default function LoggedLanding() {
 
                     <div className="recomendedProfiles">
 
-                         <h2>Recomendados</h2>
+                         <h2>Novas pessoas</h2>
 
-                         <ul>
-                              <li>
-                                   <img src="https://fastly.syfy.com/sites/syfy/files/styles/1200x680/public/calcifer-howls-moving-castle.jpg?offset-y=0" />
-                              </li>
-
-                              <li>
-                                   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" />
-                              </li>
-
-                              <li>
-                                   <img src="https://i.pinimg.com/originals/a3/f3/e7/a3f3e74b0bca67c0538383efb32c402c.png" />
-                              </li>
-                         </ul>
+                         <ul id="recomendedProfiles" />
                     </div>
                </div>
 
                <hr />
 
-               <div id="trendingGeekTopics">
-                    <div className="titleHolder">
-                         <FiTrendingUp style={{marginRight:"20px"}}/>
-                         <h2>Tópicos em alta</h2>
+               <div id="landingTrendingTopics">
+                    <div id="trendingTopicsTitle">
+                         <FiArchive style={{marginRight:"20px", fontSize:"48px"}}/>
+                         <h1>Veja algumas matérias</h1>
                     </div>
 
-                    <div id="trendingTopicLine" />
+                    <div id="trendingTopicLine">
+                         <ul id="publiHolder" />
+                    </div>
                </div>
 
                <hr />

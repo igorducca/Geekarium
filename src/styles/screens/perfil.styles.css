@@ -52,6 +52,12 @@
      justify-content: center;
 }
 
+#userVisitantImage {
+     height: 100px;
+     width: 100px;
+     border-radius: 50%;
+}
+
 #newImageInputHolder {
      display: flex;
      justify-content: center;
@@ -86,4 +92,27 @@
      font-size: 16px;
      margin-top: 20px;
      cursor: pointer;
+}
+
+#followButtonHolder button {
+     padding: 10px;
+     font-family: 'Roboto', sans-serif;
+     color: white;
+     background-color: #1ca72a;
+     border-radius: 8px;
+     border: none;
+     font-size: 16px;
+     margin-top: 50px;
+     cursor: pointer;
+}
+
+#followingButtonHolder button {
+     padding: 10px;
+     font-family: 'Roboto', sans-serif;
+     color: white;
+     background-color: #1ca72a;
+     border-radius: 8px;
+     border: none;
+     font-size: 16px;
+     margin-top: 50px;
 }

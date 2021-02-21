@@ -4,10 +4,14 @@ import axios from "axios";
 import { FiUsers, FiArchive, FiAtSign, FiHome } from "react-icons/fi";
 import Modal from "react-modal";
 import "react-modal/dist/react-modal"
+import { useCookies } from "react-cookie";
+import $ from "jquery";
 
 import "../styles/screens/perfil.styles.css";
 
 export default function Perfil() {
+
+     const [cookies, setCookie] = useCookies(["gkid"]);
 
      let { user } = useParams();
 
@@ -26,6 +30,20 @@ export default function Perfil() {
      const [ urlImage, setUrlImage ] = useState("");
 
      useEffect(() => {
+
+          axios.get(`https://geekarium.herokuapp.com/uses/get/cookie/${cookies.gkid}`)
+          .then(resp => {
+               var data = resp.data.data;
+
+               if(data.screen_name != user) {
+                    $("#titleHeader").append(`<img id="userVisitantImage" src="${data.userPicture}"/>  <h1>@${user}</h1>`)
+                    document.getElementById("followButton").href = `/follow/${user}`
+               }
+               else {
+                    document.getElementById("authorView").hidden = false;
+               }
+          })
+
           axios.get(`https://geekarium.herokuapp.com/user/get/name/${user}`)
           .then(resp => {
                var data = resp.data.data;
@@ -35,6 +53,30 @@ export default function Perfil() {
                document.getElementById("userProfileImage").src = data.userPicture;
                document.getElementById("followerCount").innerText = `${data.followers.length} seguidores`
                document.getElementById("followingCount").innerText = `${data.following.length} seguindo`
+               document.getElementById("postsCount").innerText = `${data.publis.length} publicações`
+
+               var followers = data.followers;
+
+               console.log(`length: ${followers.length}`)
+
+               if(followers.length >= 1) {
+                    axios.get(`https://geekarium.herokuapp.com/uses/get/cookie/${cookies.gkid}`)
+                    .then(respp => {
+                         followers.forEach(follower => {
+                              if(follower.target == respp.data.data.screen_name) {
+                                   document.getElementById("followingButtonHolder").hidden = false;
+                              }
+                              else {
+                                   document.getElementById("followButtonHolder").hidden = false;
+                                   document.getElementById("followButton").href = `/follow/${user}`
+                              }
+                         })
+                    })
+               }
+               else {
+                    document.getElementById("followButtonHolder").hidden = false;
+                    document.getElementById("followButton").href = `/follow/${user}`
+               }
           })
      }, [])
 
@@ -65,9 +107,20 @@ export default function Perfil() {
                     <FiHome style={{color:"white", fontSize:"24px", marginBottom:"20px", cursor:"pointer"}} onClick={() => { window.location.href="/" }} />
 
                     <div id="titleHeader">
-                         <img id="userProfileImage" onClick={imageChangeOpen}/>
-                         <h1>@{user}</h1>
+                         <div id="authorView" hidden>
+                              <img id="userProfileImage" onClick={imageChangeOpen}/>
+                              <h1>@{user}</h1>
+                         </div> 
                     </div>
+
+                    <div id="followButtonHolder" hidden>
+                         <a id="followButton"><button>Seguir</button></a>
+                    </div>
+
+                    <div id="followingButtonHolder" hidden>
+                         <button id="followingButton">Seguindo</button>
+                    </div>
+
                     <div id="dataHolder">
                          <div id="dataContainer">
                               <FiUsers style={{color:"white", fontSize:"24px"}}/>
